@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { blogs } from '@/data/blogs';
+import { blogs, formatReadTime } from '@/data/blogs';
 import { AnimatedSection, StaggeredGrid } from '@/components/AnimatedSection';
 import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
@@ -60,7 +60,7 @@ const LatestBlogSection = ({ limit = 3 }: { limit?: number }) => {
               <div className="p-7 flex flex-col flex-1">
                 <div className="flex items-center gap-4 text-slate-400 text-xs mb-4 font-medium uppercase tracking-widest">
                   <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{post.date}</span>
-                  <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{post.readTime}</span>
+                  <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{formatReadTime(post.readTime)}</span>
                 </div>
                 <h3 className="text-lg font-bold mb-3 text-slate-900 group-hover:text-primary transition-colors line-clamp-2 flex-1">
                   <Link to={`/blog/${post.slug}`}>{post.title}</Link>
