@@ -63,6 +63,10 @@ const App = () => (
                 <Route path="/services/decking" element={<CustomDecks />} />
                 <Route path="/services/residential-siding" element={<ResidentialSiding />} />
                 <Route path="/services/commercial-siding" element={<CommercialSiding />} />
+                {/* Kept as a fallback only. In production vercel.json 301s
+                    /commercial to /services/commercial-siding before the app
+                    loads, but vite dev/preview do not read vercel.json, so this
+                    keeps the old path working locally. */}
                 <Route path="/commercial" element={<CommercialSiding />} />
                 <Route path="/fire-hardening-checklist" element={<FireHardeningChecklist />} />
 
