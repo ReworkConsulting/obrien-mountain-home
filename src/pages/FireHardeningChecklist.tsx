@@ -6,6 +6,8 @@ import SEO from '@/components/SEO';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GoogleReviews from '@/components/GoogleReviews';
+import FAQ from '@/components/FAQ';
+import { checklistFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import { useParallax } from '@/hooks/useParallax';
 
 const HERO_BG = "https://vibe.filesafe.space/1777345871363473576/assets/c61746e8-5d99-4de6-b01e-617ccd3a6acb.png";
@@ -183,7 +185,8 @@ const FireHardeningChecklist = () => {
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
         { "@type": "ListItem", "position": 2, "name": "Fire Hardening Checklist", "item": "https://obrienmountainhome.com/fire-hardening-checklist" }
       ]
-    }
+    },
+    buildFaqSchema(checklistFaqs)
   ];
 
   return (
@@ -623,6 +626,8 @@ const FireHardeningChecklist = () => {
             </div>
           </div>
         </section>
+        <FAQ items={checklistFaqs} title="Questions About the Checklist" />
+
         <GoogleReviews />
       </main>
 

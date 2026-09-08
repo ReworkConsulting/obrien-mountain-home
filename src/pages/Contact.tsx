@@ -4,6 +4,8 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import ContactForm from '@/components/ContactForm';
 import GoogleReviews from '@/components/GoogleReviews';
+import FAQ from '@/components/FAQ';
+import { contactFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import ParallaxHero from '@/components/ParallaxHero';
 import { Phone, Mail, MapPin, Clock, Facebook } from 'lucide-react';
@@ -53,7 +55,8 @@ const ContactPage = () => {
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
               { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://obrienmountainhome.com/contact" }
             ]
-          }
+          },
+          buildFaqSchema(contactFaqs)
         ]}
       />
       
@@ -167,6 +170,8 @@ const ContactPage = () => {
             </div>
           </div>
         </section>
+
+        <FAQ items={contactFaqs} title="Common Questions Before You Get in Touch" />
 
         <GoogleReviews />
         <div className="h-1 bg-gradient-to-r from-slate-100 via-primary/30 to-slate-100" />

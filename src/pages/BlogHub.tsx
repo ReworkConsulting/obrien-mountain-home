@@ -4,6 +4,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { blogs } from '@/data/blogs';
+import FAQ from '@/components/FAQ';
+import { blogFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import { AnimatedSection, StaggeredGrid } from '@/components/AnimatedSection';
 import ParallaxHero from '@/components/ParallaxHero';
 import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
@@ -53,7 +55,8 @@ const BlogHub = () => {
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
               { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://obrienmountainhome.com/blog" }
             ]
-          }
+          },
+          buildFaqSchema(blogFaqs)
         ]}
       />
 
@@ -186,6 +189,8 @@ const BlogHub = () => {
             )}
           </div>
         </section>
+
+        <FAQ items={blogFaqs} title="About This Guide" />
 
         <div className="h-1 bg-gradient-to-r from-slate-100 via-primary/30 to-slate-100" />
       </main>

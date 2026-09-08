@@ -5,6 +5,8 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import PortfolioGallery from '@/components/PortfolioGallery';
 import GoogleReviews from '@/components/GoogleReviews';
+import FAQ from '@/components/FAQ';
+import { portfolioFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import ParallaxHero from '@/components/ParallaxHero';
@@ -55,7 +57,8 @@ const PortfolioPage = () => {
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
               { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://obrienmountainhome.com/portfolio" }
             ]
-          }
+          },
+          buildFaqSchema(portfolioFaqs)
         ]}
       />
       
@@ -195,6 +198,8 @@ const PortfolioPage = () => {
         <GoogleReviews />
 
         {/* Bottom CTA with background image */}
+        <FAQ items={portfolioFaqs} title="Questions About Our Work" />
+
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
