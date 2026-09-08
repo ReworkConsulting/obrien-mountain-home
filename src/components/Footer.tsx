@@ -92,7 +92,9 @@ const Footer = () => {
 
           {/* Service Areas Column */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Service Areas</h3>
+            <h3 className="text-lg font-bold mb-6">
+              <Link to="/locations" className="hover:text-primary transition-colors">Service Areas</Link>
+            </h3>
             <ul className="grid grid-cols-1 gap-4">
               {locations.slice(0, 8).map((loc) => (
                 <li key={loc.id}>

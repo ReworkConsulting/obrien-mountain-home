@@ -26,6 +26,7 @@ const ResidentialSiding = lazy(() => import("./pages/services/ResidentialSiding"
 const CommercialSiding = lazy(() => import("./pages/services/CommercialSiding"));
 const FireHardeningChecklist = lazy(() => import("./pages/FireHardeningChecklist"));
 const LocationPage = lazy(() => import("./pages/LocationPage"));
+const LocationsHub = lazy(() => import("./pages/Locations"));
 const Contact = lazy(() => import("./pages/Contact"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
@@ -71,6 +72,7 @@ const App = () => (
                 <Route path="/fire-hardening-checklist" element={<FireHardeningChecklist />} />
 
                 {/* Locations */}
+                <Route path="/locations" element={<LocationsHub />} />
                 <Route path="/locations/:slug" element={<LocationPage />} />
 
                 {/* Support */}

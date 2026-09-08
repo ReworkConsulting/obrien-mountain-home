@@ -115,12 +115,9 @@ const LocationPage = () => {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
-              /* There is no /locations hub — the app only routes /locations/:slug —
-                 so the old position 2 pointed every location page's breadcrumb at a
-                 URL that renders the 404 page. Dropping the level keeps the trail
-                 accurate; if a hub page is added later, restore this rung. */
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
-              { "@type": "ListItem", "position": 2, "name": location.name, "item": `https://obrienmountainhome.com/locations/${location.slug}` }
+              { "@type": "ListItem", "position": 2, "name": "Service Areas", "item": "https://obrienmountainhome.com/locations" },
+              { "@type": "ListItem", "position": 3, "name": location.name, "item": `https://obrienmountainhome.com/locations/${location.slug}` }
             ]
           },
           ...(locationFaqSchema ? [locationFaqSchema] : [])

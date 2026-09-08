@@ -156,6 +156,35 @@ export const checklistFaqs: FAQItem[] = [
   },
 ];
 
+/** /locations — questions about where we work and whether that includes you. */
+export const locationsFaqs: FAQItem[] = [
+  {
+    question: "What areas do you cover?",
+    answer:
+      "We work across Shasta, Tehama, Butte and Siskiyou counties from our base in Redding. The pages here cover Redding, Red Bluff, Chico, Oroville, Paradise, Magalia and Mount Shasta, plus the smaller communities in between. If your town is not listed, that does not automatically mean no — call us and we will tell you straight rather than leave you waiting on a quote that was never coming.",
+  },
+  {
+    question: "Do you charge more for work further from Redding?",
+    answer:
+      "Distance is one of the things we account for when we put an estimate together, along with access, scope and what we find on site. You will see the whole thing itemised before you commit to anything, and we will tell you up front if a location makes a project impractical rather than pricing it so high that it amounts to the same thing.",
+  },
+  {
+    question: "Why do you have a page for each town?",
+    answer:
+      "Because the answer genuinely differs by town. Paradise and Magalia sit under defensible space rules that Redding homeowners are not dealing with in the same way. Redding's sustained summer heat punishes materials that hold up fine in Mount Shasta. The county you are in determines which building department and fire authority you deal with. A single page covering all of it would be vaguer than any of them.",
+  },
+  {
+    question: "Do you work outside these counties?",
+    answer:
+      "Sometimes, depending on the project. We have taken on work further afield where the scope justified the travel. Ask us about your property and we will give you an honest answer rather than a maybe.",
+  },
+  {
+    question: "Which service areas have the highest wildfire risk?",
+    answer:
+      "Risk is set by your specific property — its slope, vegetation, construction and access — more than by which town it sits in, and every community we serve has parcels in elevated hazard areas. Rather than rank towns, we would rather walk your property. We offer a free vulnerability assessment across Northern California and will give you an honest picture of where your risk actually sits.",
+  },
+];
+
 /** /blog — questions about the guidance itself. */
 export const blogFaqs: FAQItem[] = [
   {
