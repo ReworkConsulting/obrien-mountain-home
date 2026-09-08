@@ -148,7 +148,10 @@ export const locations: Location[] = [
     id: "northern-california",
     name: "Northern California",
     slug: "northern-california",
-    county: "Various",
+    // Region page rather than a single city — name the counties actually served
+    // instead of the placeholder "Various", which rendered as the first words on
+    // the page and read as unfinished.
+    county: "Shasta, Tehama, Butte & Siskiyou Counties",
     description: "Serving the broader North State with a focus on wildfire-prone communities. We bring durable, fire-aware construction to rural and mountain homes across the region.",
     localFocus: ["North State", "Wildfire-prone communities", "Mountain homes", "Rural homes", "Exterior durability", "Long-term resilience"],
     latitude: 40.5865,

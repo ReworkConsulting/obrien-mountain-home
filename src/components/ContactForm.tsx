@@ -53,17 +53,30 @@ const ContactForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await fetch('https://services.leadconnectorhq.com/hooks/tAAVtCweX31WX2nkzQkE/webhook-trigger/02eca7e8-3fc4-4f4e-85d8-f5b1f5d4fe33', {
+      const response = await fetch('https://services.leadconnectorhq.com/hooks/tAAVtCweX31WX2nkzQkE/webhook-trigger/02eca7e8-3fc4-4f4e-85d8-f5b1f5d4fe33', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
+
+      // fetch() does NOT throw on 4xx/5xx — without this check a rejected
+      // webhook would still show the success message below.
+      if (!response.ok) {
+        throw new Error(`Webhook responded ${response.status}`);
+      }
+
+      toast.success("Estimate request sent! We'll get back to you within 24 business hours.");
+      form.reset();
     } catch (error) {
       console.error('Webhook error:', error);
+
+      // Tell the visitor it failed and give them a way through. Deliberately
+      // NOT resetting the form — they keep what they typed.
+      toast.error(
+        "Something went wrong sending your request. Please call (530) 999-7495 or email mcrans@obrienmountainhome.com and we'll take care of you.",
+        { duration: 12000 }
+      );
     }
-    
-    toast.success("Estimate request sent! We'll get back to you within 24 business hours.");
-    form.reset();
   }
 
   return (

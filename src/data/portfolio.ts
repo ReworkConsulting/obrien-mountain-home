@@ -60,7 +60,7 @@ export const portfolioProjects: PortfolioProject[] = [
     title: 'Commercial Siding Project',
     category: 'commercial-siding',
     location: 'Redding, CA',
-    challenge: 'Large commercial property that required durable processional exterior siding completed in time for their re-opening',
+    challenge: 'Large commercial property that required durable, professional exterior siding completed in time for their re-opening',
     solution: 'Installed Commercial-Grade and fiber cement siding within a month for the business owner to open in time.',
     image: 'https://vibe.filesafe.space/1777345871363473576/attachments/4d997205-bb64-4659-8f37-b04a710a915b.webp',
     link: '/commercial',

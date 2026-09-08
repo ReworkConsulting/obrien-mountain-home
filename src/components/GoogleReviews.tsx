@@ -7,10 +7,14 @@ import { Star, ExternalLink } from 'lucide-react';
 const GOOGLE_REVIEW_URL = "https://g.page/r/CdvSfOZj6Q6zEBM/review";
 const GOOGLE_PROFILE_URL = "https://maps.google.com/?cid=12902506597741023963";
 
-// Keep these in step with the live Google Business Profile — the figures are shown to
-// visitors, so a stale count is worse than none. Last checked: 19 Aug 2026.
+// Keep this in step with the live Google Business Profile — the figure is shown to
+// visitors, so a stale rating is worse than none. Last checked: 19 Aug 2026.
+//
+// The review COUNT is deliberately not displayed. It changes as reviews come in and
+// a hard-coded number goes stale quietly; the rating alone stays accurate for longer.
+// Note: if AggregateRating schema is ever added it requires a review count, so it
+// should not be emitted while the count is hidden.
 const GOOGLE_RATING = 5.0;
-const GOOGLE_REVIEW_COUNT = 19;
 
 const reviews = [
   {
@@ -71,7 +75,7 @@ export default function GoogleReviews() {
             <div className="flex items-center gap-3 mt-2">
               <StarRating rating={5} />
               <span className="text-slate-600 text-sm font-medium">
-                {GOOGLE_RATING.toFixed(1)} · {GOOGLE_REVIEW_COUNT} Google reviews
+                {GOOGLE_RATING.toFixed(1)} on Google
               </span>
             </div>
           </div>
@@ -135,8 +139,8 @@ export default function GoogleReviews() {
         {/* Bottom trust line */}
         <div className="text-center mt-8">
           <p className="text-slate-500 text-sm">
-            Rated {GOOGLE_RATING.toFixed(1)} across {GOOGLE_REVIEW_COUNT} Google reviews from Northern
-            California homeowners — read every one on our Google Business Profile.
+            Rated {GOOGLE_RATING.toFixed(1)} on Google by Northern California homeowners
+            — read every review on our Google Business Profile.
             {' '}
             <a
               href={GOOGLE_REVIEW_URL}

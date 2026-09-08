@@ -40,7 +40,13 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    // forceMount keeps answers in the DOM while collapsed so search engines can
+    // read them. Without it Radix unmounts closed content, which hid every FAQ
+    // answer on this site from crawlers (the questions rendered, the answers did not).
+    // `data-[state=closed]:h-0` holds the collapsed height after the animation ends,
+    // since CSS animations revert once complete. `overflow-hidden` keeps it invisible.
+    forceMount
+    className="overflow-hidden text-sm transition-all data-[state=closed]:h-0 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>

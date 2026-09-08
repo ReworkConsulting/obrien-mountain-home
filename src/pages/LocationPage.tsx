@@ -87,14 +87,22 @@ const LocationPage = () => {
               "latitude": 40.5866927,
               "longitude": -122.3892927
             },
-            "areaServed": {
-              "@type": "City",
-              "name": location.name,
-              "containedInPlace": {
-                "@type": "AdministrativeArea",
-                "name": location.county
-              }
-            }
+            // The Northern California page covers a region, not a city, so it is
+            // typed as an AdministrativeArea. The city pages keep City + the
+            // county as containedInPlace.
+            "areaServed": location.slug === "northern-california"
+              ? {
+                  "@type": "AdministrativeArea",
+                  "name": "Northern California"
+                }
+              : {
+                  "@type": "City",
+                  "name": location.name,
+                  "containedInPlace": {
+                    "@type": "AdministrativeArea",
+                    "name": location.county
+                  }
+                }
           },
           {
             "@context": "https://schema.org",
