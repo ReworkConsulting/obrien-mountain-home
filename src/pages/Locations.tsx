@@ -43,7 +43,7 @@ const LocationsHub = () => {
     <div className="min-h-screen bg-white">
       <SEO
         title="Service Areas Across Northern California"
-        description="Where O’Brien Mountain Home works — fire hardening, siding and decking across Shasta, Tehama, Butte and Siskiyou counties, from Redding to Mount Shasta."
+        description="Where O’Brien Mountain Home works — fire hardening, siding and decking throughout Northern California, concentrated in Shasta, Tehama, Butte and Siskiyou counties."
         canonical="/locations"
         schema={[
           {
@@ -51,7 +51,7 @@ const LocationsHub = () => {
             "@type": "CollectionPage",
             "name": "Service Areas Across Northern California",
             "url": "https://obrienmountainhome.com/locations",
-            "description": "Where O'Brien Mountain Home works — fire hardening, siding and decking across Shasta, Tehama, Butte and Siskiyou counties.",
+            "description": "Where O'Brien Mountain Home works — fire hardening, siding and decking throughout Northern California, concentrated in Shasta, Tehama, Butte and Siskiyou counties.",
             "about": {
               "@type": "LocalBusiness",
               "name": "O'Brien Mountain Home",
@@ -111,14 +111,15 @@ const LocationsHub = () => {
             <AnimatedSection>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 text-primary font-bold text-sm mb-6">
                 <MapPin className="w-4 h-4" />
-                Shasta &middot; Tehama &middot; Butte &middot; Siskiyou
+                Northern California &middot; based in Redding
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
                 Where We Work in Northern California
               </h1>
               <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                We work from Redding across four North State counties. Each community below has
-                its own conditions to build for — pick yours to see what that means in practice.
+                We work throughout Northern California from our base in Redding, with most of our
+                projects in the communities below. Each has its own conditions to build for — pick
+                yours to see what that means in practice.
               </p>
             </AnimatedSection>
           </div>

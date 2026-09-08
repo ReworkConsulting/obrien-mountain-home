@@ -55,7 +55,7 @@ export const aboutFaqs: FAQItem[] = [
   {
     question: "What areas do you serve?",
     answer:
-      "We work across Shasta, Tehama, Butte and Siskiyou counties from our base in Redding. That covers Redding, Red Bluff, Chico, Oroville, Paradise, Magalia and Mount Shasta, along with the smaller communities in between. If you are not sure whether your property falls inside that area, call us and we will tell you straight rather than leave you waiting on a quote that was never coming.",
+      "We work throughout Northern California from our base in Redding, concentrated in Shasta, Tehama, Butte and Siskiyou counties — Redding, Red Bluff, Chico, Oroville, Paradise, Magalia and Mount Shasta, along with the smaller communities in between. That is where most of our work is, not a boundary: we take on projects elsewhere in the North State where the scope justifies the trip. If you are not sure, call us and we will tell you straight rather than leave you waiting on a quote that was never coming.",
   },
   {
     question: "What makes you different from other exterior contractors?",
@@ -161,7 +161,7 @@ export const locationsFaqs: FAQItem[] = [
   {
     question: "What areas do you cover?",
     answer:
-      "We work across Shasta, Tehama, Butte and Siskiyou counties from our base in Redding. The pages here cover Redding, Red Bluff, Chico, Oroville, Paradise, Magalia and Mount Shasta, plus the smaller communities in between. If your town is not listed, that does not automatically mean no — call us and we will tell you straight rather than leave you waiting on a quote that was never coming.",
+      "We work throughout Northern California from our base in Redding. Most of our work is in Shasta, Tehama, Butte and Siskiyou counties, and the pages here cover Redding, Red Bluff, Chico, Oroville, Paradise, Magalia and Mount Shasta plus the smaller communities in between. Those pages are where our work is concentrated rather than a line on a map — we have completed projects further out, including fire hardening at Lake Almanor. If your town is not listed, call us and we will tell you straight rather than leave you waiting on a quote that was never coming.",
   },
   {
     question: "Do you charge more for work further from Redding?",
@@ -176,7 +176,7 @@ export const locationsFaqs: FAQItem[] = [
   {
     question: "Do you work outside these counties?",
     answer:
-      "Sometimes, depending on the project. We have taken on work further afield where the scope justified the travel. Ask us about your property and we will give you an honest answer rather than a maybe.",
+      "Yes, where the project justifies the trip. Our fire hardening work at Lake Almanor in Plumas County is one example, and it is no further from Redding than Oroville, which we cover as a matter of course. Ask us about your property and we will give you an honest answer rather than a maybe.",
   },
   {
     question: "Which service areas have the highest wildfire risk?",
