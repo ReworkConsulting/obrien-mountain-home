@@ -4,7 +4,8 @@ const file = `${repo}/src/data/blogs.ts`;
 const src = fs.readFileSync(file, 'utf8');
 const post = JSON.parse(fs.readFileSync(postPath, 'utf8'));
 
-const order = ['id','slug','title','excerpt','content','category','author','date','dateModified','image','readTime','keywords'];
+// Any field not listed here is silently dropped on insertion.
+const order = ['id','slug','title','excerpt','content','category','cities','author','date','dateModified','image','readTime','keywords'];
 // JSON.stringify every field => always-valid, safely-escaped TS string literals
 const body = order.filter(f => post[f] !== undefined)
   .map(f => `    ${f}: ${JSON.stringify(post[f])}`).join(',\n');

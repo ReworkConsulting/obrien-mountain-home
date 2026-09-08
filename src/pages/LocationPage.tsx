@@ -9,6 +9,7 @@ import GoogleReviews from '@/components/GoogleReviews';
 import { locations } from '@/data/locations';
 import { services } from '@/data/services';
 import { blogs } from '@/data/blogs';
+import { postCoversCity } from '@/data/postCities';
 import ServiceCard from '@/components/ServiceCard';
 import PromotionsSection from '@/components/PromotionsSection';
 import FAQ from '@/components/FAQ';
@@ -33,9 +34,9 @@ const LocationPage = () => {
      claimed they were relevant to that town. The `cities` tags in blogs.ts drive
      this now, and every location has at least one genuinely local post. */
   const relatedBlogPosts = [
-    ...blogs.filter(b => b.cities?.includes(location.slug)),
+    ...blogs.filter(b => postCoversCity(b, location.slug)),
     ...blogs.filter(
-      b => b.cities?.includes("northern-california") && !b.cities?.includes(location.slug)
+      b => postCoversCity(b, "northern-california") && !postCoversCity(b, location.slug)
     ),
   ].slice(0, 3);
 

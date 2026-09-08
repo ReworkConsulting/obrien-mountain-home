@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { blogs, formatReadTime } from '@/data/blogs';
 import { locations } from '@/data/locations';
+import { getPostCities } from '@/data/postCities';
 import { services } from '@/data/services';
 import { Calendar, User, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
 import NotFound from './NotFound';
@@ -39,8 +40,9 @@ const BlogPost = () => {
      plain text. These derive from the post's own `cities` tags and its category,
      so the links point at the pages the article is genuinely about and stay
      correct as the publishing pipeline adds posts. */
+  const postCitySlugs = post ? getPostCities(post) : [];
   const postLocations = locations.filter(
-    l => l.slug !== 'northern-california' && post?.cities?.includes(l.slug)
+    l => l.slug !== 'northern-california' && postCitySlugs.includes(l.slug)
   );
   const postService = services.find(
     sv => post && sv.slug === CATEGORY_TO_SERVICE[post.category]
