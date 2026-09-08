@@ -525,7 +525,7 @@ const CommercialSiding = () => {
                 <Button asChild size="lg" className="rounded-full px-10 py-7 text-lg font-bold bg-primary text-slate-900 hover:bg-primary/90">
                   <Link to="/contact">Request a Commercial Bid</Link>
                 </Button>
-                <a href="tel:5309997495" className="inline-flex items-center gap-2 text-white font-semibold hover:text-primary transition-colors">
+                <a href="tel:+15309997495" className="inline-flex items-center gap-2 text-white font-semibold hover:text-primary transition-colors">
                   <Phone className="w-5 h-5" /> (530) 999-7495
                 </a>
               </div>

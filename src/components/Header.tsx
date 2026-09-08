@@ -116,7 +116,7 @@ const Header = () => {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-5">
             <a
-              href="tel:5309997495"
+              href="tel:+15309997495"
               className={cn('flex items-center gap-2 text-sm font-semibold transition-colors hover:text-primary', isTransparent ? 'text-white' : 'text-slate-900')}
             >
               <Phone className="w-4 h-4" /> (530) 999-7495
@@ -206,7 +206,7 @@ const Header = () => {
               <Link to="/contact">Request an Estimate</Link>
             </Button>
             <a
-              href="tel:5309997495"
+              href="tel:+15309997495"
               className="flex items-center justify-center gap-2 py-3 border-2 border-slate-200 rounded-full text-lg font-bold text-slate-900"
             >
               <Phone className="w-5 h-5" /> Call (530) 999-7495

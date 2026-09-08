@@ -92,7 +92,7 @@ const ContactPage = () => {
                 <div>
                   <h2 className="text-2xl font-bold mb-8">Contact Information</h2>
                   <div className="space-y-6">
-                    <a href="tel:5309997495" className="flex items-start gap-4 group">
+                    <a href="tel:+15309997495" className="flex items-start gap-4 group">
                       <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
                         <Phone className="w-6 h-6" />
                       </div>

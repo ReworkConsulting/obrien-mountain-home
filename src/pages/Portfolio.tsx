@@ -112,7 +112,7 @@ const PortfolioPage = () => {
                 size="sm"
                 className="w-full rounded-lg border border-slate-500 bg-transparent text-slate-200 font-semibold hover:bg-primary hover:border-primary hover:text-slate-900 transition-all duration-200 flex items-center gap-2 justify-center"
               >
-                <a href="tel:5309997495">
+                <a href="tel:+15309997495">
                   <Phone size={14} />
                   (530) 999-7495
                 </a>
@@ -153,7 +153,7 @@ const PortfolioPage = () => {
                   size="lg"
                   className="rounded-full px-10 border-2 border-slate-400 bg-transparent text-slate-200 hover:bg-primary hover:border-primary hover:text-slate-900 font-bold transition-all duration-200"
                 >
-                  <a href="tel:5309997495">(530) 999-7495</a>
+                  <a href="tel:+15309997495">(530) 999-7495</a>
                 </Button>
               </div>
             </AnimatedSection>
@@ -225,7 +225,7 @@ const PortfolioPage = () => {
                 size="lg"
                 className="rounded-full px-10 border-2 border-slate-400 bg-transparent text-slate-200 hover:bg-primary hover:border-primary hover:text-slate-900 font-bold transition-all duration-200"
               >
-                <a href="tel:5309997495">(530) 999-7495</a>
+                <a href="tel:+15309997495">(530) 999-7495</a>
               </Button>
             </div>
           </div>

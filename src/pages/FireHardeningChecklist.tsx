@@ -354,7 +354,7 @@ const FireHardeningChecklist = () => {
                       <Button asChild className="w-full rounded-full bg-primary text-slate-900 font-bold hover:bg-primary/90 hover:text-slate-900">
                         <Link to="/contact">Book a Free Assessment</Link>
                       </Button>
-                      <p className="mt-4 text-xs text-slate-400">Or call us: <a href="tel:5309997495" className="font-semibold hover:text-primary transition-colors">(530) 999-7495</a></p>
+                      <p className="mt-4 text-xs text-slate-400">Or call us: <a href="tel:+15309997495" className="font-semibold hover:text-primary transition-colors">(530) 999-7495</a></p>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 space-y-5">
@@ -622,7 +622,7 @@ const FireHardeningChecklist = () => {
             </div>
             <div className="mt-8 flex items-center justify-center gap-2 text-slate-500 text-sm">
               <Phone className="w-4 h-4" />
-              Or call: <a href="tel:5309997495" className="text-slate-300 font-semibold hover:text-primary transition-colors">(530) 999-7495</a>
+              Or call: <a href="tel:+15309997495" className="text-slate-300 font-semibold hover:text-primary transition-colors">(530) 999-7495</a>
             </div>
           </div>
         </section>

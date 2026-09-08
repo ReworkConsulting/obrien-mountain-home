@@ -133,9 +133,26 @@ const LocationPage = () => {
                 {location.county}
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">Siding, Decking &amp; Fire Hardening in {location.name}</h1>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10">
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-8">
                 {location.description}
               </p>
+
+              {/* Every city carries an accurate, distinct localFocus array in
+                  locations.ts, and until now nothing rendered it. These are the
+                  few genuinely local terms on an otherwise templated page. */}
+              {location.localFocus?.length > 0 && (
+                <ul className="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto">
+                  {location.localFocus.map((focus) => (
+                    <li
+                      key={focus}
+                      className="px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-slate-200 text-sm font-medium"
+                    >
+                      {focus}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
               <Button asChild size="lg" className="rounded-full px-10 py-7 text-lg font-bold bg-primary text-slate-900 hover:bg-primary/90">
                 <Link to="/contact">Request an Estimate</Link>
               </Button>

@@ -379,7 +379,7 @@ const Index = () => {
             </div>
 
             <div className="text-center mt-10">
-              <a href="tel:5309997495" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition-colors text-sm font-medium">
+              <a href="tel:+15309997495" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition-colors text-sm font-medium">
                 <Phone className="w-4 h-4" />
                 Have questions? Call us directly: (530) 999-7495
               </a>
@@ -507,7 +507,7 @@ const Index = () => {
                   ))}
                 </ul>
                 <div className="mt-8 pt-8 border-t border-white/10">
-                  <a href="tel:5309997495" className="inline-flex items-center gap-3 text-white hover:text-primary transition-colors">
+                  <a href="tel:+15309997495" className="inline-flex items-center gap-3 text-white hover:text-primary transition-colors">
                     <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
                       <Phone className="w-5 h-5 text-primary" />
                     </div>
