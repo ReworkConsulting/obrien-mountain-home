@@ -20,9 +20,13 @@ import SEO from '@/components/SEO';
  *     them. Section 8 is written to offer the rights without asserting that the
  *     business is a "business" as the statute defines it — safe either way, but
  *     an attorney may want it tightened or removed.
- *  2. RETENTION PERIODS. Marked "[X]" below. Only the business knows its actual
- *     practice, and publishing a period it does not follow is worse than
- *     publishing none. THESE MUST BE FILLED IN BEFORE THIS PAGE GOES LIVE.
+ *  2. RETENTION PERIODS. Section 6 deliberately does not state how long enquiry
+ *     records or project records are kept — the business reviewed the draft and
+ *     chose to omit both rather than publish periods it might not follow. The
+ *     section still covers marketing contacts and server logs. If a reviewer
+ *     wants the gap closed without committing to a number, the usual wording is
+ *     that information is kept no longer than necessary for the purposes
+ *     described and as required by law.
  *  3. Whether to name GoHighLevel explicitly, as done here, or describe it by
  *     category only. Both are defensible; naming is more transparent.
  *  4. Whether anything here conflicts with California home improvement contract
@@ -239,8 +243,6 @@ const PrivacyPolicy = () => {
               <section>
                 <h2 className="text-2xl font-bold mb-4">6. How Long We Keep Information</h2>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li><strong>Enquiries that do not become projects</strong> — [X] months from last contact</li>
-                  <li><strong>Project records</strong> — [X] years, to meet warranty, insurance, licensing and tax obligations</li>
                   <li><strong>Marketing contacts</strong> — until you opt out, after which we keep a suppression record so we do not contact you again</li>
                   <li><strong>Website server logs</strong> — as retained by our hosting provider, typically a short period</li>
                 </ul>
