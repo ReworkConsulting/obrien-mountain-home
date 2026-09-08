@@ -4,6 +4,8 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import CTASection from '@/components/CTASection';
 import GoogleReviews from '@/components/GoogleReviews';
+import FAQ from '@/components/FAQ';
+import { aboutFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import { AnimatedSection, StaggeredGrid } from '@/components/AnimatedSection';
 import ParallaxHero from '@/components/ParallaxHero';
 import { Button } from '@/components/ui/button';
@@ -48,7 +50,8 @@ const About = () => {
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
               { "@type": "ListItem", "position": 2, "name": "About", "item": "https://obrienmountainhome.com/about" }
             ]
-          }
+          },
+          buildFaqSchema(aboutFaqs)
         ]}
       />
       
@@ -181,6 +184,8 @@ const About = () => {
         </section>
 
 
+
+        <FAQ items={aboutFaqs} title="Questions About Working With Us" />
 
         <GoogleReviews />
         <CTASection />

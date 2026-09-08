@@ -69,7 +69,7 @@ const PromotionsSection = () => {
         </div>
 
         <div className="text-center mt-10">
-          <a href="tel:5309997495" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition-colors text-sm font-medium">
+          <a href="tel:+15309997495" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition-colors text-sm font-medium">
             <Phone className="w-4 h-4" />
             Have questions? Call us directly: (530) 999-7495
           </a>

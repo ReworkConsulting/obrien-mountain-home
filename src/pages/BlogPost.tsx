@@ -3,10 +3,25 @@ import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { blogs } from '@/data/blogs';
+import { blogs, formatReadTime } from '@/data/blogs';
+import { locations } from '@/data/locations';
+import { getPostCities } from '@/data/postCities';
+import { services } from '@/data/services';
 import { Calendar, User, Clock, ArrowLeft, ArrowRight } from 'lucide-react';
 import NotFound from './NotFound';
 import GoogleReviews from '@/components/GoogleReviews';
+
+/**
+ * Blog categories map onto the four service pages. Kept here rather than on the
+ * posts themselves because the publishing pipeline writes `category` and knows
+ * nothing about routes.
+ */
+const CATEGORY_TO_SERVICE: Record<string, string> = {
+  'Fire Hardening': 'fire-hardening',
+  'Decking': 'decking',
+  'Siding': 'residential-siding',
+  'Commercial Siding': 'commercial-siding',
+};
 
 const categoryColors: Record<string, string> = {
   'Fire Hardening': 'bg-red-100 text-red-700',
@@ -19,6 +34,20 @@ const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = blogs.find(b => b.slug === slug);
   const relatedPosts = blogs.filter(b => b.id !== post?.id && b.category === post?.category).slice(0, 2);
+
+  /* Every article is about a place and a service, and until now the detail page
+     linked to neither — the footer block named seven towns and four services as
+     plain text. These derive from the post's own `cities` tags and its category,
+     so the links point at the pages the article is genuinely about and stay
+     correct as the publishing pipeline adds posts. */
+  const postCitySlugs = post ? getPostCities(post) : [];
+  const postLocations = locations.filter(
+    l => l.slug !== 'northern-california' && postCitySlugs.includes(l.slug)
+  );
+  const postService = services.find(
+    sv => post && sv.slug === CATEGORY_TO_SERVICE[post.category]
+  );
+  const otherLocations = locations.filter(l => l.slug !== 'northern-california' && l.slug !== 'redding-ca');
 
   if (!post) return <NotFound />;
 
@@ -95,7 +124,7 @@ const BlogPost = () => {
               <div className="flex flex-wrap items-center gap-5 text-slate-300 text-sm">
                 <span className="flex items-center gap-1.5"><User className="w-4 h-4" />{post.author}</span>
                 <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" />{post.date}</span>
-                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{post.readTime}</span>
+                <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" />{formatReadTime(post.readTime)}</span>
               </div>
             </div>
           </div>
@@ -134,7 +163,48 @@ const BlogPost = () => {
           {/* Company details */}
           <div style={{marginTop:'3.5rem',padding:'2rem 1.75rem',border:'1px solid #e5e7eb',borderRadius:'16px',background:'#f8fafc'}}>
             <h2 style={{margin:'0 0 0.75rem',fontSize:'24px',fontWeight:700}}>Serving Redding &amp; Northern California</h2>
-            <p style={{margin:'0 0 1rem',lineHeight:1.7}}>O'Brien Mountain Home provides professional fire hardening, custom decks, residential siding, and commercial siding throughout Redding and Northern California — including Paradise, Magalia, Chico, Red Bluff, Oroville, and Mount Shasta. Licensed California contractor (Lic# 1135995).</p>
+            <p style={{margin:'0 0 1rem',lineHeight:1.7}}>
+              O'Brien Mountain Home provides professional{' '}
+              {services.map((sv, i) => (
+                <React.Fragment key={sv.slug}>
+                  {i > 0 && (i === services.length - 1 ? ', and ' : ', ')}
+                  <Link to={`/services/${sv.slug}`} className="text-primary font-medium">{sv.title.toLowerCase()}</Link>
+                </React.Fragment>
+              ))}{' '}
+              throughout <Link to="/locations/redding-ca" className="text-primary font-medium">Redding</Link> and{' '}
+              <Link to="/locations/northern-california" className="text-primary font-medium">Northern California</Link> — including{' '}
+              {otherLocations.map((l, i) => (
+                <React.Fragment key={l.slug}>
+                  {i > 0 && (i === otherLocations.length - 1 ? ', and ' : ', ')}
+                  <Link to={`/locations/${l.slug}`} className="text-primary font-medium">{l.name.replace(', CA', '')}</Link>
+                </React.Fragment>
+              ))}
+              . Licensed California contractor (Lic# 1135995).
+            </p>
+
+            {/* The specific service and town this article is about, so the reader
+                lands on the matching page rather than scanning the list above. */}
+            {(postService || postLocations.length > 0) && (
+              <p style={{margin:'0 0 1rem',lineHeight:1.7}}>
+                This article covers our{' '}
+                {postService ? (
+                  <Link to={`/services/${postService.slug}`} className="text-primary font-medium">{postService.title.toLowerCase()}</Link>
+                ) : 'exterior'}{' '}
+                work
+                {postLocations.length > 0 && (
+                  <>
+                    {' '}in{' '}
+                    {postLocations.map((l, i) => (
+                      <React.Fragment key={l.slug}>
+                        {i > 0 && (i === postLocations.length - 1 ? ' and ' : ', ')}
+                        <Link to={`/locations/${l.slug}`} className="text-primary font-medium">{l.name.replace(', CA', '')}</Link>
+                      </React.Fragment>
+                    ))}
+                  </>
+                )}
+                .
+              </p>
+            )}
             <p style={{margin:'0 0 1.5rem',lineHeight:1.7}}><strong>Website:</strong> <a href="https://obrienmountainhome.com" className="text-primary">obrienmountainhome.com</a><br /><strong>Phone:</strong> <a href="tel:+15309997495" className="text-primary">(530) 999-7495</a></p>
             <p style={{margin:0}}><Link to="/contact" style={{display:'inline-block',background:'#f6ad56',color:'#0f172a',fontWeight:700,padding:'15px 32px',borderRadius:'999px',textDecoration:'none'}}>Request an Estimate →</Link></p>
           </div>

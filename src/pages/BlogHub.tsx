@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { blogs } from '@/data/blogs';
+import { blogs, formatReadTime } from '@/data/blogs';
+import FAQ from '@/components/FAQ';
+import { blogFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import { AnimatedSection, StaggeredGrid } from '@/components/AnimatedSection';
 import ParallaxHero from '@/components/ParallaxHero';
 import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
@@ -53,7 +55,8 @@ const BlogHub = () => {
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
               { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://obrienmountainhome.com/blog" }
             ]
-          }
+          },
+          buildFaqSchema(blogFaqs)
         ]}
       />
 
@@ -126,7 +129,7 @@ const BlogHub = () => {
                   <div className="p-10 flex flex-col justify-center">
                     <div className="flex items-center gap-4 text-slate-400 text-xs mb-5 font-medium uppercase tracking-widest">
                       <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{featured.date}</span>
-                      <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{featured.readTime}</span>
+                      <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{formatReadTime(featured.readTime)}</span>
                     </div>
                     <h2 className="text-2xl md:text-3xl font-black text-slate-900 group-hover:text-primary transition-colors mb-5 leading-tight">
                       {featured.title}
@@ -161,7 +164,7 @@ const BlogHub = () => {
                     <div className="p-7 flex flex-col flex-1">
                       <div className="flex items-center gap-4 text-slate-400 text-xs mb-4 font-medium uppercase tracking-widest">
                         <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{post.date}</span>
-                        <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{post.readTime}</span>
+                        <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" />{formatReadTime(post.readTime)}</span>
                       </div>
                       <h2 className="text-lg font-bold mb-3 text-slate-900 group-hover:text-primary transition-colors line-clamp-2 flex-1">
                         <Link to={`/blog/${post.slug}`}>{post.title}</Link>
@@ -186,6 +189,8 @@ const BlogHub = () => {
             )}
           </div>
         </section>
+
+        <FAQ items={blogFaqs} title="About This Guide" />
 
         <div className="h-1 bg-gradient-to-r from-slate-100 via-primary/30 to-slate-100" />
       </main>

@@ -9,6 +9,7 @@ import GoogleReviews from '@/components/GoogleReviews';
 import { locations } from '@/data/locations';
 import { services } from '@/data/services';
 import { blogs } from '@/data/blogs';
+import { postCoversCity } from '@/data/postCities';
 import ServiceCard from '@/components/ServiceCard';
 import PromotionsSection from '@/components/PromotionsSection';
 import FAQ from '@/components/FAQ';
@@ -26,11 +27,18 @@ const LocationPage = () => {
     return <NotFound />;
   }
 
-  // Filter relevant blog posts: fire hardening posts for high-risk locations, all posts otherwise
-  const isFireRiskLocation = location.slug === "paradise-ca" || location.slug === "magalia-ca";
-  const relatedBlogPosts = isFireRiskLocation
-    ? blogs.filter(b => b.category === "Fire Hardening").slice(0, 2)
-    : blogs.slice(0, 2);
+  /* Related posts, in order of how related they actually are: posts written about
+     this city first, then region-wide posts. Previously only Paradise and Magalia
+     got anything targeted and the other six pages fell through to blogs.slice(0, 2),
+     which put the same two newest posts on every location page under a heading that
+     claimed they were relevant to that town. The `cities` tags in blogs.ts drive
+     this now, and every location has at least one genuinely local post. */
+  const relatedBlogPosts = [
+    ...blogs.filter(b => postCoversCity(b, location.slug)),
+    ...blogs.filter(
+      b => postCoversCity(b, "northern-california") && !postCoversCity(b, location.slug)
+    ),
+  ].slice(0, 3);
 
   // Merge location-specific FAQs with general FAQs (location-specific shown first)
   const locationFaqItems = location.faqs
@@ -87,21 +95,29 @@ const LocationPage = () => {
               "latitude": 40.5866927,
               "longitude": -122.3892927
             },
-            "areaServed": {
-              "@type": "City",
-              "name": location.name,
-              "containedInPlace": {
-                "@type": "AdministrativeArea",
-                "name": location.county
-              }
-            }
+            // The Northern California page covers a region, not a city, so it is
+            // typed as an AdministrativeArea. The city pages keep City + the
+            // county as containedInPlace.
+            "areaServed": location.slug === "northern-california"
+              ? {
+                  "@type": "AdministrativeArea",
+                  "name": "Northern California"
+                }
+              : {
+                  "@type": "City",
+                  "name": location.name,
+                  "containedInPlace": {
+                    "@type": "AdministrativeArea",
+                    "name": location.county
+                  }
+                }
           },
           {
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
             "itemListElement": [
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
-              { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://obrienmountainhome.com/locations" },
+              { "@type": "ListItem", "position": 2, "name": "Service Areas", "item": "https://obrienmountainhome.com/locations" },
               { "@type": "ListItem", "position": 3, "name": location.name, "item": `https://obrienmountainhome.com/locations/${location.slug}` }
             ]
           },
@@ -125,9 +141,26 @@ const LocationPage = () => {
                 {location.county}
               </div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">Siding, Decking &amp; Fire Hardening in {location.name}</h1>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10">
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-8">
                 {location.description}
               </p>
+
+              {/* Every city carries an accurate, distinct localFocus array in
+                  locations.ts, and until now nothing rendered it. These are the
+                  few genuinely local terms on an otherwise templated page. */}
+              {location.localFocus?.length > 0 && (
+                <ul className="flex flex-wrap justify-center gap-2 mb-10 max-w-3xl mx-auto">
+                  {location.localFocus.map((focus) => (
+                    <li
+                      key={focus}
+                      className="px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-slate-200 text-sm font-medium"
+                    >
+                      {focus}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
               <Button asChild size="lg" className="rounded-full px-10 py-7 text-lg font-bold bg-primary text-slate-900 hover:bg-primary/90">
                 <Link to="/contact">Request an Estimate</Link>
               </Button>
@@ -216,7 +249,7 @@ const LocationPage = () => {
                 <h2 className="text-2xl md:text-3xl font-bold mb-2">Related Articles</h2>
                 <p className="text-slate-500 text-sm">Resources for {location.name.split(',')[0]} homeowners</p>
               </AnimatedSection>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {relatedBlogPosts.map(post => (
                   <Link
                     key={post.id}

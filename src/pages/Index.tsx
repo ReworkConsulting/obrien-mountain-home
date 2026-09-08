@@ -36,7 +36,7 @@ const GBP_URL = "https://maps.google.com/?cid=12902506597741023963";
 const FACEBOOK_URL = "https://www.facebook.com/obrienmountainhome";
 
 // Four JSON-LD blocks: LocalBusiness entity, FAQPage (for AI Overviews),
-// Organization (with sameAs for entity disambiguation), WebSite (SearchAction).
+// Organization (with sameAs for entity disambiguation), WebSite.
 const LOCAL_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -116,15 +116,12 @@ const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "O'Brien Mountain Home",
-  "url": "https://obrienmountainhome.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://obrienmountainhome.com/?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "url": "https://obrienmountainhome.com"
+  /* No potentialAction/SearchAction here on purpose. The sitelinks searchbox
+     markup declares that the site has a search endpoint; this one does not —
+     /?q= is not handled and simply returns the homepage — so the declaration
+     described a feature that does not exist. Add it back only alongside a real
+     search results route. */
 };
 
 const homepageSchemas = [LOCAL_BUSINESS_SCHEMA, FAQ_PAGE_SCHEMA, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
@@ -379,7 +376,7 @@ const Index = () => {
             </div>
 
             <div className="text-center mt-10">
-              <a href="tel:5309997495" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition-colors text-sm font-medium">
+              <a href="tel:+15309997495" className="inline-flex items-center gap-2 text-slate-400 hover:text-primary transition-colors text-sm font-medium">
                 <Phone className="w-4 h-4" />
                 Have questions? Call us directly: (530) 999-7495
               </a>
@@ -507,7 +504,7 @@ const Index = () => {
                   ))}
                 </ul>
                 <div className="mt-8 pt-8 border-t border-white/10">
-                  <a href="tel:5309997495" className="inline-flex items-center gap-3 text-white hover:text-primary transition-colors">
+                  <a href="tel:+15309997495" className="inline-flex items-center gap-3 text-white hover:text-primary transition-colors">
                     <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
                       <Phone className="w-5 h-5 text-primary" />
                     </div>

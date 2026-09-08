@@ -19,7 +19,7 @@ const CTASection: React.FC<CTASectionProps> = ({
   primaryText = "Request an Estimate",
   primaryLink = "/contact",
   secondaryText = "Call (530) 999-7495",
-  secondaryLink = "tel:5309997495",
+  secondaryLink = "tel:+15309997495",
   className = ""
 }) => {
   return (

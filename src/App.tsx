@@ -26,6 +26,7 @@ const ResidentialSiding = lazy(() => import("./pages/services/ResidentialSiding"
 const CommercialSiding = lazy(() => import("./pages/services/CommercialSiding"));
 const FireHardeningChecklist = lazy(() => import("./pages/FireHardeningChecklist"));
 const LocationPage = lazy(() => import("./pages/LocationPage"));
+const LocationsHub = lazy(() => import("./pages/Locations"));
 const Contact = lazy(() => import("./pages/Contact"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/Terms"));
@@ -63,10 +64,15 @@ const App = () => (
                 <Route path="/services/decking" element={<CustomDecks />} />
                 <Route path="/services/residential-siding" element={<ResidentialSiding />} />
                 <Route path="/services/commercial-siding" element={<CommercialSiding />} />
+                {/* Kept as a fallback only. In production vercel.json 301s
+                    /commercial to /services/commercial-siding before the app
+                    loads, but vite dev/preview do not read vercel.json, so this
+                    keeps the old path working locally. */}
                 <Route path="/commercial" element={<CommercialSiding />} />
                 <Route path="/fire-hardening-checklist" element={<FireHardeningChecklist />} />
 
                 {/* Locations */}
+                <Route path="/locations" element={<LocationsHub />} />
                 <Route path="/locations/:slug" element={<LocationPage />} />
 
                 {/* Support */}

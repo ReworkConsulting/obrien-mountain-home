@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="dns-prefetch" href="//vibe.filesafe.space" />
     <link rel="preconnect" href="https://vibe.filesafe.space" crossorigin="anonymous" />
+
+    <!--
+      FALLBACK METADATA ONLY — these are the HOMEPAGE values.
+
+      react-helmet-async injects correct per-page title/description/OG/canonical at
+      runtime, and Google renders JavaScript so it sees those. But social scrapers
+      (Facebook, LinkedIn, iMessage) generally do NOT run JS, so without these tags
+      they would show no preview at all — hence they stay.
+
+      The trade-off: on every page except the homepage these are wrong, and every
+      page ends up with two sets of meta tags (static + Helmet's). The only real fix
+      is build-time prerendering, which would emit the correct tags per route and let
+      these be deleted. Until then, treat these as the no-JS fallback.
+    -->
     <title>Siding &amp; Deck Contractor in Redding, CA | O’Brien Mountain Home</title>
     <meta name="description" content="Licensed siding and deck contractor in Redding, CA and the North State. O’Brien Mountain Home installs durable siding and custom decks. Free estimate." />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -12,7 +26,10 @@
     <meta property="og:description" content="Licensed siding and deck contractor in Redding, CA and the North State. O’Brien Mountain Home installs durable siding and custom decks. Free estimate." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://vibe.filesafe.space/1777345871363473576/assets/99cdc4bc-0ac2-4dd1-b0b7-0cc82cf49e32.png" />
-    <meta property="og:url" content="/" />
+    <!-- Open Graph requires an ABSOLUTE url. This was "/", which no scraper can resolve. -->
+    <meta property="og:url" content="https://obrienmountainhome.com/" />
+    <meta property="og:site_name" content="O’Brien Mountain Home" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Siding &amp; Deck Contractor in Redding, CA | O’Brien Mountain Home" />
     <meta name="twitter:description" content="Licensed siding and deck contractor in Redding, CA and the North State. O’Brien Mountain Home installs durable siding and custom decks. Free estimate." />

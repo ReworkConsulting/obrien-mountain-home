@@ -6,6 +6,8 @@ import SEO from '@/components/SEO';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import GoogleReviews from '@/components/GoogleReviews';
+import FAQ from '@/components/FAQ';
+import { checklistFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import { useParallax } from '@/hooks/useParallax';
 
 const HERO_BG = "https://vibe.filesafe.space/1777345871363473576/assets/c61746e8-5d99-4de6-b01e-617ccd3a6acb.png";
@@ -99,6 +101,7 @@ const FireHardeningChecklist = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sendError, setSendError] = useState<string | null>(null);
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -114,16 +117,36 @@ const FireHardeningChecklist = () => {
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setErrors({});
+    setSendError(null);
     setLoading(true);
     try {
-      // TODO: CRM tracking integration — wire up with trackingId and locationId
-      // Custom fields to include:
-      //   { id: "HzrIDXhe8qHebRN3Qm9T", key: "contact.how_did_you_hear_about_us", field_value: formData.hearAboutUs }
-      //   { id: "CZY1S2u96d4QLy93QZdU", key: "contact.checklist_download_source", field_value: "Fire Hardening Checklist Page" }
-      await new Promise(r => setTimeout(r, 900));
+      const response = await fetch('https://services.leadconnectorhq.com/hooks/tAAVtCweX31WX2nkzQkE/webhook-trigger/02eca7e8-3fc4-4f4e-85d8-f5b1f5d4fe33', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          location: formData.city,
+          referral: formData.hearAboutUs,
+          consent: formData.consent,
+          // Lets you separate checklist requests from estimate requests in GHL.
+          source: 'Fire Hardening Checklist Page',
+        }),
+      });
+
+      // fetch() does NOT throw on 4xx/5xx — without this the success screen
+      // would show even when the lead never arrived.
+      if (!response.ok) {
+        throw new Error(`Webhook responded ${response.status}`);
+      }
+
       setSubmitted(true);
-      // TODO: Trigger PDF download after successful submission
-      // window.open('/assets/fire-hardening-checklist.pdf', '_blank');
+    } catch (error) {
+      console.error('Checklist webhook error:', error);
+      setSendError(
+        "We couldn't send your request just now. Please call (530) 999-7495 or email mcrans@obrienmountainhome.com and we'll get the checklist straight over to you."
+      );
     } finally {
       setLoading(false);
     }
@@ -162,7 +185,8 @@ const FireHardeningChecklist = () => {
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
         { "@type": "ListItem", "position": 2, "name": "Fire Hardening Checklist", "item": "https://obrienmountainhome.com/fire-hardening-checklist" }
       ]
-    }
+    },
+    buildFaqSchema(checklistFaqs)
   ];
 
   return (
@@ -274,22 +298,19 @@ const FireHardeningChecklist = () => {
                     </div>
                   ))}
 
-                  {/* Blurred teaser */}
-                  <div className="relative border rounded-2xl p-6 bg-slate-100 border-slate-200 overflow-hidden">
-                    <div className="absolute inset-0 backdrop-blur-sm bg-slate-100/60 flex flex-col items-center justify-center z-10">
-                      <Lock className="w-8 h-8 text-slate-400 mb-2" />
-                      <p className="text-sm font-semibold text-slate-600">Unlock 2 more sections — free</p>
-                    </div>
-                    <div className="opacity-20 pointer-events-none">
-                      <h3 className="font-bold text-slate-900 text-lg mb-3">Bonus Section</h3>
-                      <ul className="space-y-2">
-                        {["Hidden item 1", "Hidden item 2", "Hidden item 3"].map((i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                            <div className="w-5 h-5 border-2 border-slate-300 rounded mt-0.5 shrink-0" />
-                            {i}
-                          </li>
-                        ))}
-                      </ul>
+                  {/* Printable version prompt — replaces the old blurred teaser,
+                      which gated two "bonus sections" that were never written and
+                      showed literal "Hidden item 1/2/3" placeholder text. */}
+                  <div className="border rounded-2xl p-6 bg-slate-50 border-slate-200">
+                    <div className="flex items-start gap-3">
+                      <Download className="w-6 h-6 text-primary mt-0.5 shrink-0" />
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-lg mb-1">Want this as a printable checklist?</h3>
+                        <p className="text-sm text-slate-600 leading-relaxed">
+                          Fill in the form and we'll send you a copy you can print and carry
+                          around your property — plus the option of a free walk-through with us.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -317,9 +338,9 @@ const FireHardeningChecklist = () => {
                       <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
                         <CheckCircle2 className="w-10 h-10 text-green-600" />
                       </div>
-                      <h3 className="text-2xl font-bold text-slate-900 mb-3">You're all set!</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-3">Got it — thank you!</h3>
                       <p className="text-slate-600 mb-6 leading-relaxed">
-                        Your Fire Hardening Checklist is on its way to your inbox. Check your email — and check your spam folder if you don't see it within a few minutes.
+                        We've received your request and we'll send your Fire Hardening Checklist over shortly. In the meantime, the full checklist is laid out on this page — scroll up to work through it now.
                       </p>
                       <div className="bg-primary/10 border border-primary/20 rounded-2xl p-5 text-left mb-6">
                         <div className="flex items-start gap-3">
@@ -333,7 +354,7 @@ const FireHardeningChecklist = () => {
                       <Button asChild className="w-full rounded-full bg-primary text-slate-900 font-bold hover:bg-primary/90 hover:text-slate-900">
                         <Link to="/contact">Book a Free Assessment</Link>
                       </Button>
-                      <p className="mt-4 text-xs text-slate-400">Or call us: <a href="tel:5309997495" className="font-semibold hover:text-primary transition-colors">(530) 999-7495</a></p>
+                      <p className="mt-4 text-xs text-slate-400">Or call us: <a href="tel:+15309997495" className="font-semibold hover:text-primary transition-colors">(530) 999-7495</a></p>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 space-y-5">
@@ -444,6 +465,12 @@ const FireHardeningChecklist = () => {
                         </label>
                         {errors.consent && <p className="text-red-500 text-xs mt-1 ml-7">{errors.consent}</p>}
                       </div>
+
+                      {sendError && (
+                        <p role="alert" className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-xl p-3 leading-relaxed">
+                          {sendError}
+                        </p>
+                      )}
 
                       <button
                         type="submit"
@@ -595,10 +622,12 @@ const FireHardeningChecklist = () => {
             </div>
             <div className="mt-8 flex items-center justify-center gap-2 text-slate-500 text-sm">
               <Phone className="w-4 h-4" />
-              Or call: <a href="tel:5309997495" className="text-slate-300 font-semibold hover:text-primary transition-colors">(530) 999-7495</a>
+              Or call: <a href="tel:+15309997495" className="text-slate-300 font-semibold hover:text-primary transition-colors">(530) 999-7495</a>
             </div>
           </div>
         </section>
+        <FAQ items={checklistFaqs} title="Questions About the Checklist" />
+
         <GoogleReviews />
       </main>
 

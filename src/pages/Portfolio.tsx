@@ -5,6 +5,8 @@ import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import PortfolioGallery from '@/components/PortfolioGallery';
 import GoogleReviews from '@/components/GoogleReviews';
+import FAQ from '@/components/FAQ';
+import { portfolioFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import BeforeAfterSlider from '@/components/BeforeAfterSlider';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import ParallaxHero from '@/components/ParallaxHero';
@@ -55,7 +57,8 @@ const PortfolioPage = () => {
               { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
               { "@type": "ListItem", "position": 2, "name": "Portfolio", "item": "https://obrienmountainhome.com/portfolio" }
             ]
-          }
+          },
+          buildFaqSchema(portfolioFaqs)
         ]}
       />
       
@@ -109,7 +112,7 @@ const PortfolioPage = () => {
                 size="sm"
                 className="w-full rounded-lg border border-slate-500 bg-transparent text-slate-200 font-semibold hover:bg-primary hover:border-primary hover:text-slate-900 transition-all duration-200 flex items-center gap-2 justify-center"
               >
-                <a href="tel:5309997495">
+                <a href="tel:+15309997495">
                   <Phone size={14} />
                   (530) 999-7495
                 </a>
@@ -150,7 +153,7 @@ const PortfolioPage = () => {
                   size="lg"
                   className="rounded-full px-10 border-2 border-slate-400 bg-transparent text-slate-200 hover:bg-primary hover:border-primary hover:text-slate-900 font-bold transition-all duration-200"
                 >
-                  <a href="tel:5309997495">(530) 999-7495</a>
+                  <a href="tel:+15309997495">(530) 999-7495</a>
                 </Button>
               </div>
             </AnimatedSection>
@@ -195,6 +198,8 @@ const PortfolioPage = () => {
         <GoogleReviews />
 
         {/* Bottom CTA with background image */}
+        <FAQ items={portfolioFaqs} title="Questions About Our Work" />
+
         <section className="relative py-24 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
@@ -220,7 +225,7 @@ const PortfolioPage = () => {
                 size="lg"
                 className="rounded-full px-10 border-2 border-slate-400 bg-transparent text-slate-200 hover:bg-primary hover:border-primary hover:text-slate-900 font-bold transition-all duration-200"
               >
-                <a href="tel:5309997495">(530) 999-7495</a>
+                <a href="tel:+15309997495">(530) 999-7495</a>
               </Button>
             </div>
           </div>

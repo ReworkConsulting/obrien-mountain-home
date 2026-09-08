@@ -54,13 +54,15 @@
     "date": "Month D, YYYY",
     "dateModified": "optional ISO string",
     "image": "absolute URL; requires alt text in the body hero",
-    "readTime": "'N min read'",
-    "keywords": "comma-separated; emitted as hidden <meta name='keywords'>, not shown on page"
+    "readTime": "'N min read'. A bare number is accepted and normalised by formatReadTime in src/data/blogs.ts, but prefer the string.",
+    "keywords": "comma-separated; emitted as hidden <meta name='keywords'>, not shown on page",
+    "cities": "optional array of location slugs from src/data/locations.ts (redding-ca, red-bluff-ca, chico-ca, oroville-ca, paradise-ca, magalia-ca, mount-shasta-ca, northern-california). Pairs the post with its location page in both directions. Omit when the slug already leads with the town \u2014 src/data/postCities.ts derives it from the slug in that case. Set it explicitly when the post covers several towns, or is about a town with no page of its own (use the nearest page that genuinely applies)."
   },
   "categories": [
     "Fire Hardening",
     "Decking",
     "Siding",
+    "Commercial Siding",
     "Local"
   ],
   "authors": [
@@ -90,12 +92,13 @@
     "min_internal_links": 2,
     "closing_business_block": "required",
     "service_area_mentions": "primary_city + region required in intro and closing block",
-    "keywords": "hidden meta + woven naturally into body/title/excerpt"
+    "keywords": "hidden meta + woven naturally into body/title/excerpt",
+    "location_tagging": "If the post is about a specific town, lead the slug with it (chico-ca-..., ...-red-bluff-...). That is what pairs the post with its location page."
   },
   "content_context": {
-    "primary_source": "client website — service pages + existing blog posts (read at generation time for full, accurate context)",
+    "primary_source": "client website \u2014 service pages + existing blog posts (read at generation time for full, accurate context)",
     "service_pages_path": "src/pages/services/ and src/data/services.ts",
     "existing_posts_path": "src/data/blogs.ts (used to avoid duplicate topics)",
-    "note": "Do NOT use the Client Directory 'Services Sold'/'Niche' fields for topic context — those describe what the agency sells the client, not the client's own customer-facing services. Directory is used only for business metadata (website, phone, location, Google Business URL)."
+    "note": "Do NOT use the Client Directory 'Services Sold'/'Niche' fields for topic context \u2014 those describe what the agency sells the client, not the client's own customer-facing services. Directory is used only for business metadata (website, phone, location, Google Business URL)."
   }
 }

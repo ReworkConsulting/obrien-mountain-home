@@ -58,7 +58,7 @@ const NotFound = () => {
 
           <p className="mt-8 text-sm text-slate-400">
             Need help?{" "}
-            <a href="tel:5309997495" className="text-primary font-semibold hover:underline">
+            <a href="tel:+15309997495" className="text-primary font-semibold hover:underline">
               (530) 999-7495
             </a>
           </p>

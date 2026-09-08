@@ -92,7 +92,9 @@ const Footer = () => {
 
           {/* Service Areas Column */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Service Areas</h3>
+            <h3 className="text-lg font-bold mb-6">
+              <Link to="/locations" className="hover:text-primary transition-colors">Service Areas</Link>
+            </h3>
             <ul className="grid grid-cols-1 gap-4">
               {locations.slice(0, 8).map((loc) => (
                 <li key={loc.id}>
@@ -117,7 +119,7 @@ const Footer = () => {
               </li>
               <li className="flex gap-4">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <a href="tel:5309997495" className="text-slate-400 hover:text-primary transition-colors text-sm">
+                <a href="tel:+15309997495" className="text-slate-400 hover:text-primary transition-colors text-sm">
                   (530) 999-7495
                 </a>
               </li>
