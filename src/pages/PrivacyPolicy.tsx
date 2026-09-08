@@ -39,6 +39,8 @@ import SEO from '@/components/SEO';
 
 // Update whenever the text below changes.
 const LAST_UPDATED = '8 September 2026';
+/** Same date, machine-readable, for the WebPage schema's dateModified. */
+const LAST_UPDATED_ISO = '2026-09-08';
 
 const PrivacyPolicy = () => {
   return (
@@ -47,6 +49,37 @@ const PrivacyPolicy = () => {
         title="Privacy Policy"
         description="How O’Brien Mountain Home collects, uses, shares and protects your personal information, and the choices you have."
         canonical="/privacy-policy"
+        /* These two pages were the only ones on the site emitting no structured
+           data at all. dateModified matters here specifically: it is how a
+           policy page signals that its terms are current. */
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Privacy Policy",
+            "url": "https://obrienmountainhome.com/privacy-policy",
+            "description": "How O'Brien Mountain Home collects, uses, shares and protects your personal information, and the choices you have.",
+            "dateModified": LAST_UPDATED_ISO,
+            "isPartOf": {
+              "@type": "WebSite",
+              "name": "O'Brien Mountain Home",
+              "url": "https://obrienmountainhome.com"
+            },
+            "publisher": {
+              "@type": "LocalBusiness",
+              "name": "O'Brien Mountain Home",
+              "url": "https://obrienmountainhome.com"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
+              { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://obrienmountainhome.com/privacy-policy" }
+            ]
+          }
+        ]}
         robots="noindex,follow"
       />
 

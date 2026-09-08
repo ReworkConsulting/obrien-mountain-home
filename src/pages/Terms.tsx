@@ -33,6 +33,8 @@ import SEO from '@/components/SEO';
 
 // Update whenever the text below changes.
 const LAST_UPDATED = '8 September 2026';
+/** Same date, machine-readable, for the WebPage schema's dateModified. */
+const LAST_UPDATED_ISO = '2026-09-08';
 
 const Terms = () => {
   return (
@@ -41,6 +43,34 @@ const Terms = () => {
         title="Terms and Conditions"
         description="Terms and conditions for using the O’Brien Mountain Home website, including how our published guidance should and should not be relied on."
         canonical="/terms"
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Terms and Conditions",
+            "url": "https://obrienmountainhome.com/terms",
+            "description": "Terms and conditions for using the O'Brien Mountain Home website, including how our published guidance should and should not be relied on.",
+            "dateModified": LAST_UPDATED_ISO,
+            "isPartOf": {
+              "@type": "WebSite",
+              "name": "O'Brien Mountain Home",
+              "url": "https://obrienmountainhome.com"
+            },
+            "publisher": {
+              "@type": "LocalBusiness",
+              "name": "O'Brien Mountain Home",
+              "url": "https://obrienmountainhome.com"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://obrienmountainhome.com" },
+              { "@type": "ListItem", "position": 2, "name": "Terms and Conditions", "item": "https://obrienmountainhome.com/terms" }
+            ]
+          }
+        ]}
         robots="noindex,follow"
       />
 

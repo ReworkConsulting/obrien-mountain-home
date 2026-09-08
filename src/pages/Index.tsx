@@ -36,7 +36,7 @@ const GBP_URL = "https://maps.google.com/?cid=12902506597741023963";
 const FACEBOOK_URL = "https://www.facebook.com/obrienmountainhome";
 
 // Four JSON-LD blocks: LocalBusiness entity, FAQPage (for AI Overviews),
-// Organization (with sameAs for entity disambiguation), WebSite (SearchAction).
+// Organization (with sameAs for entity disambiguation), WebSite.
 const LOCAL_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -116,15 +116,12 @@ const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "O'Brien Mountain Home",
-  "url": "https://obrienmountainhome.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://obrienmountainhome.com/?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+  "url": "https://obrienmountainhome.com"
+  /* No potentialAction/SearchAction here on purpose. The sitelinks searchbox
+     markup declares that the site has a search endpoint; this one does not —
+     /?q= is not handled and simply returns the homepage — so the declaration
+     described a feature that does not exist. Add it back only alongside a real
+     search results route. */
 };
 
 const homepageSchemas = [LOCAL_BUSINESS_SCHEMA, FAQ_PAGE_SCHEMA, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA];
