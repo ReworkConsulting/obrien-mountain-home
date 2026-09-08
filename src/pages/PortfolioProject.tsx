@@ -9,6 +9,8 @@ import ProjectPhotoGallery from '@/components/ProjectPhotoGallery';
 import BeforeAfterGallery from '@/components/BeforeAfterGallery';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { portfolioProjects } from '@/data/portfolio';
+import { locations } from '@/data/locations';
+import { services } from '@/data/services';
 import NotFound from '@/pages/NotFound';
 import { MapPin, ArrowLeft } from 'lucide-react';
 
@@ -43,6 +45,24 @@ const PortfolioProject = () => {
 
   // Projects with a before/after pair lay their photos out there; the rest need a
   // plain gallery, or their extra photos only ever appear in the hero carousel.
+  /* These pages carried three internal links each — home, portfolio, and the
+     estimate CTA — with nothing pointing at the service the project demonstrates
+     or the town it was built in. Both are already on the project record, so the
+     links derive from it rather than being maintained by hand.
+     `category` matches the service slugs one-for-one. */
+  const service = services.find(sv => sv.slug === project.category);
+  const projectLocation = locations.find(l => l.name === project.location);
+
+  /* Same kind of work first, then anything else nearby, so a visitor who came in
+     on one deck build can see the other deck builds. Only projects that have a
+     detail page of their own are eligible. */
+  const siblings = portfolioProjects.filter(pr => pr.slug && pr.id !== project.id);
+  const relatedProjects = [
+    ...siblings.filter(pr => pr.category === project.category),
+    ...siblings.filter(pr => pr.category !== project.category && pr.location === project.location),
+    ...siblings.filter(pr => pr.category !== project.category && pr.location !== project.location),
+  ].slice(0, 3);
+
   const showPhotoGallery = !project.beforeAfter && (project.images?.length ?? 0) > 1;
   const hasGallery = Boolean(project.beforeAfter) || showPhotoGallery;
 
@@ -192,6 +212,37 @@ const PortfolioProject = () => {
             </div>
           </AnimatedSection>
 
+          {/* The service this project demonstrates and the town it was built in.
+              The chips above stay as plain text deliberately: they name materials
+              and brands (Vulcan Vents, Trex Enhance), not services, so linking
+              each one to a service page would misrepresent where it leads. */}
+          {(service || projectLocation) && (
+            <AnimatedSection className="mt-14 pt-10 border-t border-slate-100">
+              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-4">
+                More About This Work
+              </span>
+              <div className="flex flex-wrap gap-3">
+                {service && (
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary transition-colors"
+                  >
+                    {service.title} services
+                  </Link>
+                )}
+                {projectLocation && (
+                  <Link
+                    to={`/locations/${projectLocation.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-5 py-2.5 text-sm font-semibold text-slate-700 hover:border-primary/40 hover:text-primary transition-colors"
+                  >
+                    <MapPin className="w-4 h-4" />
+                    What we do in {projectLocation.name.replace(', CA', '')}
+                  </Link>
+                )}
+              </div>
+            </AnimatedSection>
+          )}
+
           <div className="mt-14">
             <Link
               to="/portfolio"
@@ -202,6 +253,46 @@ const PortfolioProject = () => {
             </Link>
           </div>
         </section>
+
+        {/* Related projects */}
+        {relatedProjects.length > 0 && (
+          <section className="py-16 bg-slate-50 border-t border-slate-100">
+            <div className="container mx-auto px-4 max-w-5xl">
+              <AnimatedSection className="mb-8">
+                <h2 className="text-2xl font-bold text-slate-900">Related Projects</h2>
+              </AnimatedSection>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {relatedProjects.map(rp => (
+                  <Link
+                    key={rp.id}
+                    to={`/portfolio/${rp.slug}`}
+                    className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img
+                        src={rp.image}
+                        alt={rp.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <span className={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[rp.category] ?? 'bg-primary/10 text-primary'}`}>
+                        {categoryLabels[rp.category] ?? rp.category.replace('-', ' ')}
+                      </span>
+                      <h3 className="text-base font-bold text-slate-900 mt-3 mb-1 group-hover:text-primary transition-colors line-clamp-2">
+                        {rp.title}
+                      </h3>
+                      <span className="text-xs text-slate-500 inline-flex items-center gap-1">
+                        <MapPin className="w-3 h-3" />{rp.location}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <CTASection
           title="Have a Project Like This?"
