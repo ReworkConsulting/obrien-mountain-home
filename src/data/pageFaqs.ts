@@ -40,6 +40,40 @@ export const buildFaqSchema = (items: FAQItem[]) => ({
  *  - Answer honestly, including when the answer is "you don't need us for that".
  */
 
+/** / — a first-time visitor sizing up the company: what we do, where, and how to start. */
+export const homeFaqs: FAQItem[] = [
+  {
+    question: "What services does O'Brien Mountain Home offer?",
+    answer:
+      "Four: fire hardening, custom decking, residential siding and commercial siding. Most of our work is on existing homes in the North State — replacing ember-prone vents, building or resurfacing decks, and upgrading to durable siding such as fiber cement — along with siding work for property managers, general contractors and commercial owners. Each service has its own page with the detail.",
+  },
+  {
+    question: "Where are you based, and which areas do you cover?",
+    answer:
+      "We are based in Redding, at 1304 East St, and most of our work is in Redding, Red Bluff, Chico, Oroville, Paradise, Magalia and Mount Shasta, along with the smaller communities in between. That is where we work most, not a hard boundary — if you are elsewhere in Northern California, ask and we will tell you straight whether we can take the job.",
+  },
+  {
+    question: "Why do material choices matter so much for homes in Northern California?",
+    answer:
+      "Homes here deal with sustained summer heat, strong sun, smoke seasons, wildfire risk and seasonal rain, and a material that suits a milder climate can fail early or add to a home's fire exposure. We help you choose practical materials for these conditions and use Class A-rated options where possible, so the work holds up and you are not paying to do it twice.",
+  },
+  {
+    question: "What current offers do you have?",
+    answer:
+      "Three at the moment: a first-time customer discount on qualifying projects, project bundling when you combine siding and decking work, which often reduces the total cost, and a free fire hardening inspection. Mention the offer when you request your estimate and we will confirm whether your project qualifies before you commit to anything.",
+  },
+  {
+    question: "How does a project work, from first call to finished job?",
+    answer:
+      "Four steps. We assess the home and listen to the problem, then give you an honest, clear estimate based on the scope and material options. If you go ahead, we install with regular communication and attention to detail, and finish by walking through the work with you to make sure you are happy before the job is closed out.",
+  },
+  {
+    question: "Are you licensed?",
+    answer:
+      "Yes. O'Brien Mountain Home is a licensed California contractor, licence number 1135995. You can verify it through the Contractors State License Board at www.cslb.ca.gov.",
+  },
+];
+
 /** /about — who we are, and whether we can be trusted with the work. */
 export const aboutFaqs: FAQItem[] = [
   {

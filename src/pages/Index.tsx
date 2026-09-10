@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { services } from '@/data/services';
-import { faqs } from '@/data/faqs';
+import { homeFaqs, buildFaqSchema } from '@/data/pageFaqs';
 import SEO from '@/components/SEO';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -79,18 +79,8 @@ const LOCAL_BUSINESS_SCHEMA = {
   "areaServed": ["Redding", "Red Bluff", "Chico", "Oroville", "Paradise", "Magalia", "Mount Shasta", "Northern California"]
 };
 
-const FAQ_PAGE_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqs.slice(0, 6).map(faq => ({
-    "@type": "Question",
-    "name": faq.question,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": faq.answer
-    }
-  }))
-};
+// Built from the same homeFaqs the visible FAQ section renders.
+const FAQ_PAGE_SCHEMA = buildFaqSchema(homeFaqs);
 
 const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
@@ -460,9 +450,9 @@ const Index = () => {
         </LazySection>
 
         {/* ─── FAQ ─── */}
-        <LazySection minHeight="300px">
-          <FAQ items={faqs} />
-        </LazySection>
+        {/* Not wrapped in LazySection: that only mounts on scroll, so crawlers and audits
+            that don't scroll saw no FAQ at all — and FAQ_PAGE_SCHEMA must match visible content. */}
+        <FAQ items={homeFaqs} title="Questions We Hear From North State Homeowners" />
 
         {/* ─── Opt-In / Lead Capture Section ─── */}
         <section className="relative py-24 overflow-hidden">

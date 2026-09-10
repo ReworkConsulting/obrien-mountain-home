@@ -18,7 +18,8 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      <Helmet>
+      {/* defer={false} — see SEO.tsx: the default rAF-deferred write never runs in hidden tabs/crawlers */}
+      <Helmet defer={false}>
         <title>404 – Page Not Found | O'Brien Mountain Home</title>
         <meta name="robots" content="noindex" />
       </Helmet>

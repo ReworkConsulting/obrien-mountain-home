@@ -55,8 +55,14 @@ const SEO: React.FC<SEOProps> = ({
       : [schema]
     : [];
 
+  // defer={false}: Helmet's default (defer=true) writes the head inside a
+  // requestAnimationFrame callback. Browsers do not run rAF in background/hidden
+  // tabs, prerendered pages, or many headless crawlers and audit tools, so on a
+  // direct load in those contexts the head was never written at all — the page kept
+  // index.html's homepage title/description with no canonical or JSON-LD. Writing
+  // synchronously on mount works everywhere.
   return (
-    <Helmet>
+    <Helmet defer={false}>
       <title>{fullTitle}</title>
       <meta name="description" content={trimmedDescription} />
       <link rel="canonical" href={fullUrl} />
